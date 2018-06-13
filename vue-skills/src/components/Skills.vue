@@ -4,8 +4,10 @@
   <input type="text" placeholder="Enter a skill you have"
   v-model="skill" v-validate=" 'min:3' " name="skill">
   <input type="checkbox" id="checkbox" v-model="checked">
-  <p class="validate" v-if="errors.has('skill')">
-  {{ errors.first('skill') }}</p>
+  <transition name="validate-in">
+  <span class="validate" v-if="errors.has('skill')">
+  {{ errors.first('skill') }}</span>
+  </transition>
   </form>
     <ul>
       <li v-for="(data, index) in skills" :key='index'>

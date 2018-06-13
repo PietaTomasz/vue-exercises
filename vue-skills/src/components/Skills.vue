@@ -11,7 +11,10 @@
   </form>
     <ul>
       <li v-for="(data, index) in skills" :key='index'>
-      #{{ index }}: {{ data.skill }}</li>
+      #{{ index }}: {{ data.skill }}
+      <span v-on:click="remove(index)">X</span>
+      <i class="fa fa-minus-circle" v-on:click="remove(index)"></i>
+      </li>
       <p v-if="skills.length >=3">
       You have more than 3 skills</p>
       <p v-else>
@@ -55,12 +58,13 @@ export default {
           console.log('Not valid')
         }
       } )      
+    },
+    remove(id) {
+      this.skills.splice(id,1);
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="./Skills.css" scoped>
-@import "http://cdn/jsdelivr.net/npm/animate.css@3.5.1";
-</style>
+<style src="./Skills.css" scoped></style>

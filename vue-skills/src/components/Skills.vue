@@ -61,4 +61,6 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="./Skills.css" scoped></style>
+<style src="./Skills.css" scoped>
+@import "http://cdn/jsdelivr.net/npm/animate.css@3.5.1";
+</style>

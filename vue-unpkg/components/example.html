@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://unpkg.com/vue"></script>
+    <title>Example</title>
+</head>
+<body>
+    <div id="app">
+        <counter></counter>
+        <counter v-bind:num="2"></counter>
+        <counter v-bind:num="3"></counter>
+        <counter v-bind:num="3"></counter>
+        <button v-on:click="reveal">Reveal</button>
+        <ul>Males:
+            <li v-for="user in users" v-if="user.male">Name: {{user.name}}, age: {{user.age}}</li>
+        </ul>
+        <ul>Females:
+            <li v-for="user in users" v-if="!user.male">Name: {{user.name}}, age: {{user.age}}</li>
+        </ul>
+    </div>
+    <script>
+    let counter = Vue.component('counter',{
+        data() {
+            return {
+                count: 0
+            }
+        },
+        props: {
+            num : {
+                type: Number,
+                default: 1  
+            }
+        },
+        methods: {
+            increment() {
+                this.count += this.num
+            },
+            decrement() {
+                this.count -= this.num
+            }
+        },
+        template: `
+        <div>
+            <div>Count: {{this.count}}</div>
+            <button @click="increment">Increment by {{this.num}}</button>
+            <button v-if="this.count>0" @click="decrement">Decrement by {{this.num}}</button>
+        </div>      
+        `
+    })
+
+    let app = new Vue({
+        el: '#app',
+        components: {
+            counter
+        },
+        data: {
+            secretNumber: Math.floor(Math.random()*100)+1,
+            users: [
+      { name: 'John', age: 50, male: true},
+      { name: 'Jane', age: 22, male: false},
+      { name: 'Paul', age: 34, male: true},
+      { name: 'Kate', age: 15, male: false},
+      { name: 'Amanda', age: 65, male: false},
+      { name: 'Steve', age: 38, male: true},
+      { name: 'Keith', age: 21, male: true},
+      { name: 'Don', age: 50, male: true},
+      { name: 'Susan', age: 21, male: false}
+    ]
+        },
+        methods: {
+            reveal() {
+                alert(`Here's the secret number ${this.secretNumber}`);
+            }
+        }
+    })
+    </script>
+</body>
+</html>
